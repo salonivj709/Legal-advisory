@@ -1,0 +1,16 @@
+const express=require("express");
+const router=express.Router();
+const {verifyToken,authorizeRoles}=require("../middleware/authMiddleware");
+const c=require("../controllers/workspaceController");
+router.use(verifyToken);
+router.get("/requests",c.listRequests);
+router.post("/requests",authorizeRoles("client"),c.createRequest);
+router.patch("/requests/:id",authorizeRoles("advisor","admin"),c.updateRequest);
+router.get("/consultations",c.listConsultations);
+router.post("/consultations",authorizeRoles("client"),c.createConsultation);
+router.get("/messages",c.listMessages);
+router.get("/contacts",c.listContacts);
+router.post("/messages",c.sendMessage);
+router.get("/profile",c.getProfile);
+router.patch("/profile",c.updateProfile);
+module.exports=router;

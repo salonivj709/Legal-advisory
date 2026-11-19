@@ -1,0 +1,12 @@
+const router=require('express').Router();
+const {verifyToken,authorizeRoles}=require('../middleware/authMiddleware');
+const admin=require('../controllers/adminController');
+router.use(verifyToken,authorizeRoles('admin'));
+router.get('/overview',admin.getOverview);
+router.get('/users',admin.listUsers);
+router.get('/advisors',admin.listAdvisors);
+router.patch('/users/:id',admin.updateUser);
+router.get('/access-control',admin.getAccess);
+router.get('/settings',admin.getSettings);
+router.put('/settings',admin.updateSettings);
+module.exports=router;

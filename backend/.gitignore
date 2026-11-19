@@ -1,0 +1,4 @@
+node_modules/\n.env\n.env.*\n!.env.example\n*.log\n
+# Confidential matter files (never commit)
+private_uploads/
+.env
